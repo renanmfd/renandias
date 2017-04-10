@@ -26,18 +26,19 @@ function portifolio_preprocess_node(&$vars) {
     $terms = \Drupal::service('entity_type.manager')
       ->getStorage("taxonomy_term")
       ->loadTree('experience_level');
-    $nodeLevelId = $node->get('field_level')->getValue()['target_id'];
-    ksm($terms);
+    $nodeLevelId = $node->get('field_level');
+    ksm($nodeLevelId);
     foreach ($terms as $term) {
-      $vars['exp_levels'][$term->tid] = [
+      $tid = intval($term->tid);
+      $vars['exp_levels'][$tid] = [
         '#markup' => $term->name,
         '#prefix' => '<div class="level">',
         '#suffix' => '</div>',
       ];
-      if ($term->tid !== $nodeLevelId) {
-        $vars['exp_levels'][$term->tid]['#prefix'] = '<div class="level active">';
+      if ($tid !== $nodeLevelId) {
+        $vars['exp_levels'][$tid]['#prefix'] = '<div class="level active">';
       }
     }
-    ksm([$node->get('field_level')->getValue(), $vars['exp_levels']]);
+    ksm($vars['exp_levels']);
   }
 }
