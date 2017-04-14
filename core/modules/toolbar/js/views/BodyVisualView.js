@@ -28,6 +28,8 @@
       var orientation = this.model.get('orientation');
       var isOriented = this.model.get('isOriented');
       var isViewportOverflowConstrained = this.model.get('isViewportOverflowConstrained');
+      
+      console.log('BodyVisualViews.js', this.model, this.model.get('offsets'));
 
       $body
         // We are using JavaScript to control media-query handling for two

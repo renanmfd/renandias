@@ -1,0 +1,113 @@
+// main: ../style.less
+
+@max-size: 280px;
+@lines-body: 4;
+@lines-title-xs: 3;
+@lines-title: 2;
+
+.article.display-card {
+  max-width: @max-size;
+  margin-bottom: 30px;
+  overflow: hidden;
+  
+  > a {
+    display: block;
+    position: relative;
+    padding-left: 20px;
+    padding-bottom: 15px;
+    
+    border: 3px solid @main-color;
+    border-top: 0;
+    border-right: 0;
+    border-bottom-left-radius: 60px;
+    transition: all .3s ease-in-out;
+
+    &:hover,
+    &:focus {
+      text-decoration: none;
+    }
+    
+    &:hover {
+      border-color: @main-color-lighter;
+
+      h3 span {
+        text-decoration-color: @main-color;
+      }
+      img {
+        transform: scale(1.1);
+      }
+    }
+  }
+
+  h3 {
+    position: relative;
+    height: @lines-title-xs * 26px;
+    line-height: 26px;
+    margin-top: 0;
+    margin-bottom: 5px;
+    overflow: hidden;
+    
+    @media screen and (min-width: 500px) {
+      height: @lines-title * 26px;
+    }
+
+    > div {
+      display: table; 
+      position: absolute; 
+      left: 0; 
+      top: 0; 
+      width: 100%; 
+      height: @lines-title-xs * 26px;
+      
+      @media screen and (min-width: 500px) {
+        height: @lines-title * 26px;
+      }
+    }
+    
+    span {
+      display: table-cell; 
+      vertical-align: middle; 
+      text-align: left; 
+      color: @main-color;
+      text-decoration: underline;
+      text-decoration-color: transparent;
+      transition: all .3s ease-in-out;
+    }
+  }
+  
+  .field--name-field-image {
+    overflow: hidden;
+
+    img {
+      transition: all .3s ease-in-out;
+    }
+  }
+  
+  .field--name-body {
+    display: none;
+    height: 20px * @lines-body;
+    line-height: 20px;
+    margin-top: 10px;
+    color: @coal;
+    overflow: hidden;
+    
+    @media screen and (min-width: @screen-sm) {
+      display: block;
+    }
+
+    * {
+      color: @black;
+      text-align: left;
+    }
+  }
+  
+  .author {
+    color: @main-gray;
+  }
+  
+  footer {
+    margin-top: 10px;
+    padding-left: 20px;
+    text-align: right;
+  }
+}

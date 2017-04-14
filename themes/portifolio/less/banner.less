@@ -1,0 +1,47 @@
+// main: style.less
+
+#banner {
+  border-top: 5px solid @main-gray;
+  transition: all ease-in 10s;
+
+  .js-banner-mask-loaded & {
+    border-color: @main-color;
+  }
+}
+
+.region-banner {
+  position: relative;
+
+  .image-mask {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+
+    img {
+      display: none;
+      width: 100%;
+      height: auto;
+
+      &.active {
+        display: block;
+      }
+    }
+  }
+  
+  #block-portifolio-account-menu {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    z-index: 1;
+  }
+  
+  #block-portifolio-branding {
+    position: absolute;
+    right: 0;
+    top: 20px;
+    z-index: 1;
+  }
+}

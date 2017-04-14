@@ -1,0 +1,63 @@
+// main: ../style.less
+
+.path-frontpage {
+  .view-frontpage {
+    .view-header {
+      position: relative;
+      text-align: center;
+
+      a {
+        padding: 0 20px;
+        background-color: @background;
+        color: @main-color;
+        text-decoration: underline;
+        text-decoration-color: transparent;
+        transition: all .3s ease-in-out;
+        
+        &:hover {
+          text-decoration-color: @main-color;
+        }
+      }
+      h3:after {
+        content: '';
+        display: block;
+        position: absolute;
+        top: 50%;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background-color: @main-color;
+        z-index: -1;
+      }
+    }
+    .view-content {
+      text-align: center;
+      font-size: 0;
+      margin-left: -15px;
+      margin-right: -15px;
+    }
+    .views-row {
+      display: inline-block;
+      vertical-align: top;
+      max-width: 50%;
+      padding-right: 15px;
+      padding-left: 15px;
+      
+      @media screen and (min-width: @screen-md) {
+        max-width: 33.33%;
+
+        &:nth-child(4) {
+          display: none;
+        }
+      }
+      
+      @media screen and (min-width: @screen-lg) {
+        max-width: 25%;
+
+        &:nth-child(4n) {
+          display: inline-block;
+        }
+      }
+    }
+  }
+}

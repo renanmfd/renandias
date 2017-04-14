@@ -86,7 +86,16 @@
  * );
  * @endcode
  */
- $databases = array();
+$databases['default']['default'] = array (
+  'database' => '',
+  'username' => '',
+  'password' => '',
+  'prefix' => '',
+  'host' => 'localhost',
+  'port' => '3306',
+  'namespace' => 'Drupal\\Core\\Database\\Driver\\mysql',
+  'driver' => 'mysql',
+);
 
 /**
  * Customizing database settings.
@@ -760,18 +769,9 @@ $settings['file_scan_ignore_directories'] = [
  * Keep this code block at the end of this file to take full effect.
  */
 #
-# if (file_exists($app_root . '/' . $site_path . '/settings.local.php')) {
-#   include $app_root . '/' . $site_path . '/settings.local.php';
-# }
-$databases['default']['default'] = array (
-  'database' => 'portifolio',
-  'username' => 'portifolio',
-  'password' => 'portifolio',
-  'prefix' => '',
-  'host' => 'localhost',
-  'port' => '3306',
-  'namespace' => 'Drupal\\Core\\Database\\Driver\\mysql',
-  'driver' => 'mysql',
-);
+if (file_exists($app_root . '/' . $site_path . '/settings.local.php')) {
+  include $app_root . '/' . $site_path . '/settings.local.php';
+}
+
 $settings['install_profile'] = 'standard';
 $config_directories['sync'] = 'sites/default/files/config_sxt8NMFKdT166o9mxGjKBp9aniMyY6kI6Mck0cxBVeeVDT4qy-nliLIM7XpffDgAh9etnY1rTw/sync';
