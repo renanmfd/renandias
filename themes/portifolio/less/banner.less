@@ -1,11 +1,12 @@
 // main: style.less
 
 #banner {
-  border-top: 5px solid @main-gray;
+  border-top: 5px solid;
+  border-color: @main-color;
   transition: all ease-in 10s;
 
-  .js-banner-mask-loaded & {
-    border-color: @main-color;
+  .js-banner-mask-loaded& {
+    //border-color: @main-color; // colors.less file
   }
 }
 
@@ -30,18 +31,179 @@
       }
     }
   }
-  
+
+  .view-home-banner {
+    height: 200px;
+    overflow: hidden;
+    
+    .path-frontpage & {
+      height: auto;
+    }
+    img {
+      min-width: 600px;
+      margin: 0 auto;
+      opacity: 0.7;
+
+      @media screen and (min-width: @screen-sm) {
+        opacity: 1;
+      }
+      .path-frontpage & {
+        margin: 0;
+      }
+    }
+  }
+
   #block-portifolio-account-menu {
     position: absolute;
     right: 0;
-    top: 50%;
+    z-index: 2;
+
+    .path-frontpage & {
+      left: 0;
+      right: initial;
+      bottom: 0;
+    }
+    li {
+      float: left;
+      
+      &:first-child a {
+        padding-left: 0;
+      }
+    }
+  }
+
+  #block-portifolio-branding {
+    display: inline-block;
+    position: absolute;
+    left: 0;
+    bottom: 20px;
     z-index: 1;
+    
+    .path-frontpage & {
+      top: 20px;
+      bottom: initial;
+      left: initial;
+      right: 0;
+    }
+  }
+
+  .logo {
+    margin-bottom: 0;
+    transition: all .3s ease-in-out;
+
+    &:hover svg {
+      //animation-name: logo;
+      //animation-duration: 0.5s;
+      //animation-timing-function: ease-in-out;
+      //animation-iteration-count: infinite;
+      transform: rotate(3deg);
+    }
+    svg {
+      transition: all .3s ease-in-out;
+      width: 220px;
+      height: auto;
+      
+      .path-frontpage & {
+        width: auto;
+      }
+    }
+  }
+}
+
+/*@keyframes logo {
+  0% { transform: rotate(1deg); }
+  50% { transform: rotate(-1deg); }
+  100% { transform: rotate(1deg); }
+}*/
+
+#block-portifoliobannerslogan {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 150px;
+  height: 100px;
+  z-index: 2;
+  text-align: left;
+  
+  .path-frontpage & {
+    top: 70%;
+    bottom: initial;
+  }
+
+  span, .carret {
+    font-family: monospace;
+    font-size: 22px;
+    color: @main-gray-darker;
+    text-shadow: 0 0 2px @main-gray;
+    
+    @media screen and (min-width: @screen-sm) {
+      text-shadow: none;  
+    }
+  }
+
+  .carret {
+    float: left;
+    margin-left: -3px;
+    font-style: normal;
+    transition: none;
+    animation-name: carret;
+    animation-duration: 0.7s;
+    animation-iteration-count: infinite;
   }
   
-  #block-portifolio-branding {
-    position: absolute;
-    right: 0;
-    top: 20px;
-    z-index: 1;
+  p {font-size: 0;}
+
+  span {
+    float: left;
+    visibility: hidden;
+    font-size: 0;
+
+    animation-name: letters;
+    animation-delay: 2s;
+    animation-fill-mode: forwards;
+
+    .loop(30);
+  }
+  
+  .line {
+    clear: none;
+    width: 1px;
+    height: auto;
+
+    animation-name: lines;
+    animation-delay: 2s;
+    animation-fill-mode: forwards;
+  }
+}
+
+@keyframes carret {
+  0%, 49% { color: transparent; }
+  50%, 99% { color: @main-gray; }
+  100% { color: transparent; }
+}
+
+@keyframes letters {
+  0%, 99% {
+    visibility: hidden;
+    font-size: 0;
+  }
+  100% {
+    visibility: visible;
+    font-size: 22px;
+  }
+}
+@keyframes lines {
+  0%, 99% { clear: none; }
+  100% { clear: both; }
+}
+
+.letters(@index) {
+  animation-duration: @index * 0.2s;
+}
+
+.loop(@counter) when (@counter > 0) {
+  .loop((@counter - 1));    // next iteration
+  &:nth-child(@{counter}) {
+    .letters(@counter); // code for each iteration
   }
 }

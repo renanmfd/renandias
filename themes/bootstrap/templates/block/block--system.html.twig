@@ -6,4 +6,7 @@
  * @ingroup templates
  */
 #}
-{% extends "block--bare.html.twig" %}
+<section{{ attributes.addClass(classes) }}>
+  {{ title_prefix }}
+  {{ content }}
+</section>

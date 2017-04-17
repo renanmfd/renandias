@@ -1,0 +1,129 @@
+// main: ../style.less
+
+@tutorialTeaser-titleLines-xs: 4;
+@tutorialTeaser-titleLines: 2;
+@tutorialTeaser-summaryLines: 2;
+
+.book.display-card {
+  position: relative;
+  border-bottom: @theme-line-width solid;
+  border-color: @main-color;
+  
+  @media screen and (min-width: @screen-sm) {
+    height: auto;
+    margin-bottom: 20px;
+  }
+
+  > a {
+    display: inline-block;
+    width: 100%;
+    min-height: 160px;
+    position: relative;
+
+    transition: all .3s ease-in-out;
+    
+    @media screen and (min-width: @screen-sm) {
+      min-height: 0;
+      padding-bottom: 20px;
+    }
+
+    &:hover,
+    &:focus {
+      text-decoration: none;
+    }
+  
+    &:hover {
+      .content {
+        background-color: @main-gray-soft;
+      }
+      img {
+        transform: scale(1.1);
+      }
+    }
+  }
+
+  h3 {
+    position: relative;
+    height: @tutorialTeaser-titleLines-xs * 25px;
+    line-height: 25px;
+    margin-top: 0;
+    margin-bottom: 0;
+    overflow: hidden;
+  
+    @media screen and (min-width: @screen-sm) {
+      height: @tutorialTeaser-titleLines * 25px;
+    }
+
+    > div {
+      display: table; 
+      position: absolute; 
+      left: 0; 
+      top: 0; 
+      width: 100%; 
+      height: @tutorialTeaser-titleLines-xs * 25px;
+      
+      @media screen and (min-width: @screen-sm) {
+        height: @tutorialTeaser-titleLines * 25px;
+      }
+    }
+
+    span {
+      display: table-cell; 
+      vertical-align: middle; 
+      text-align: left;
+      color: @main-color;
+    }
+  }
+
+  .image {
+    position: absolute;
+    left: 0;
+    top: 0;
+
+    .field--name-field-image {
+      overflow: hidden;
+
+      img {
+        transition: all .3s ease-in-out;
+      }
+    }
+  }
+
+  .content {
+    min-height: 100px;
+    margin-left: 160px;
+    margin-bottom: 60px;
+    padding-left: 20px;
+    
+    background-color: transparent;
+    transition: all .3s ease-in-out;
+
+    @media screen and (min-width: @screen-sm) {
+      margin-bottom: 0;
+      padding-right: 20px;
+    }
+
+    .field--name-field-simple-summary {
+      position: absolute;
+      left: 0;
+      width: 100%;
+      height: 20px * @tutorialTeaser-summaryLines;
+
+      color: @main-gray-darker;
+      line-height: 20px;
+      margin-top: 10px;
+      overflow: hidden;
+
+      @media screen and (min-width: @screen-sm) {
+        position: relative;  
+      }
+      * {
+        text-align: left;
+      }
+    }
+  }
+
+  .author {
+    color: @main-gray-lighter;
+  }
+}

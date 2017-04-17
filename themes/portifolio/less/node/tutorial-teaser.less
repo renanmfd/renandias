@@ -1,0 +1,135 @@
+// main: ../style.less
+
+@tutorialTeaser-titleLines-xs: 4;
+@tutorialTeaser-titleLines: 2;
+@tutorialTeaser-summaryLines: 2;
+
+// main: ../style.less
+
+@articleTeaser-titleLines-xs: 4;
+@articleTeaser-titleLines: 2;
+@articleTeaser-summaryLines: 3;
+
+.book.display-teaser {
+  position: relative;
+  margin-bottom: 20px;
+  border-bottom: @theme-line-width solid;
+  border-color: @main-color;
+
+  > a {
+    display: block;
+    position: relative;
+    transition: all .3s ease-in-out;
+
+    @media screen and (min-width: @screen-md) {
+      padding-left: 20px;
+      margin-left: 200px;
+    }
+
+    &:hover,
+    &:focus {
+      text-decoration: none;
+    }
+
+    &:hover {
+      span {
+        text-decoration-color: @main-color;
+      }
+      .content {
+        background-color: @main-gray-soft;
+      }
+    }
+    h3 {
+      position: relative;
+      margin-top: 0;
+
+      span {
+        color: @main-color;
+        text-decoration: underline;
+        text-decoration-color: transparent;
+      }
+    }
+  }
+
+  .content {
+    margin-bottom: 20px;
+    
+    background-color: transparent;
+    transition: all .3s ease-in-out;
+
+    @media screen and (min-width: @screen-md) {
+      min-height: 114px;
+      margin-left: 200px;
+      padding-left: 20px;
+    }
+
+    .field--name-field-image {
+      display: none;
+      position: absolute;
+      top: 0;
+      left: 0;
+      overflow: hidden;
+  
+      &:hover {
+        img {
+          transform: scale(1.1);
+        }
+      }
+      @media screen and (min-width: @screen-md) {
+        display: block;  
+      }
+      img {
+        transition: all .3s ease-in-out;
+      }
+    }
+    .field--name-body {
+      color: @coal;
+      margin-top: 5px;
+    }
+    .field--name-field-tags {
+      margin-top: 5px;
+
+      .field--item {
+        display: inline-block;
+        
+        &:after {
+          content: ',';
+          color: @main-gray-darker;
+          opacity: 0.9;
+        }
+        &:last-child:after {
+          content: '';
+        }
+        &:first-child:before {
+          content: '\e041';
+          vertical-align: middle;
+          margin-right: 10px;
+          font-family: 'Glyphicons Halflings';
+          font-style: normal;
+          font-weight: 400;
+          line-height: 1;
+          color: @main-gray-darker;
+          opacity: 0.9;
+        }
+        a {
+          color: @main-gray-darker;
+          opacity: 0.9;
+          transition: all .3s ease-in-out;
+          
+          &:hover {
+            color: @main-color;
+          }
+        }
+      }
+    }
+  }
+
+  .author {
+    color: @main-gray-darker;
+    opacity: 0.9;
+    
+    .glyphicon {
+      margin-right: 5px;
+    }
+  }
+}

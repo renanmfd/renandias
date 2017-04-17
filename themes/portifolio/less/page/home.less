@@ -1,47 +1,65 @@
 // main: ../style.less
 
 .path-frontpage {
-  .view-frontpage {
-    .view-header {
-      position: relative;
-      text-align: center;
+  .page-header {
+    display: none;
+  }
 
-      a {
-        padding: 0 20px;
-        background-color: @background;
-        color: @main-color;
-        text-decoration: underline;
-        text-decoration-color: transparent;
-        transition: all .3s ease-in-out;
-        
-        &:hover {
-          text-decoration-color: @main-color;
+  .view-header {
+    position: relative;
+    text-align: center;
+
+    a {
+      position: relative;
+      padding: 0 20px;
+      background-color: @background;
+      text-decoration: none;
+
+      &:hover {
+        &:after {
+          background-color: @main-color;
         }
       }
-      h3:after {
+      &:after {
         content: '';
         display: block;
-        position: absolute;
-        top: 50%;
-        left: 0;
         width: 100%;
         height: 2px;
-        background-color: @main-color;
-        z-index: -1;
+        position: absolute;
+        left: 0;
+        bottom: 5px;
+        background-color: transparent;
+        transition: all .3s ease-in-out;
       }
     }
+    h3 {
+      margin-top: 0;
+    }
+    h3:after {
+      content: '';
+      display: block;
+      position: absolute;
+      top: 50%;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      z-index: -1;
+    }
+  }
+
+  .view-frontpage {
     .view-content {
       text-align: center;
       font-size: 0;
-      margin-left: -15px;
-      margin-right: -15px;
+      margin-left: -10px;
+      margin-right: -10px;
     }
     .views-row {
       display: inline-block;
       vertical-align: top;
       max-width: 50%;
-      padding-right: 15px;
-      padding-left: 15px;
+      padding-right: 10px;
+      padding-left: 10px;
       
       @media screen and (min-width: @screen-md) {
         max-width: 33.33%;
@@ -58,6 +76,41 @@
           display: inline-block;
         }
       }
+    }
+  }
+
+  .view-home-tutorials {
+    > .contextual {
+      display: none;
+    }
+    .views-row {
+      margin-bottom: 20px;
+      
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  #block-views-block-home-tutorials-block-1 {
+    margin-bottom: 20px;
+  }
+  
+  .block-adsense {
+    display: none;
+    padding: 20px 0;
+    margin-bottom: 40px;
+
+    background-image: url('../images/ad-background.jpg');
+    
+    @media screen and (min-width: @screen-sm) {
+      display: block;
+      margin-left: -20px;
+      margin-right: -20px;
+    }
+    @media screen and (min-width: @screen-md) {
+      margin-left: 0;
+      margin-right: 0;
     }
   }
 }

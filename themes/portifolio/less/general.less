@@ -7,3 +7,63 @@ body {
 #page {
   position: relative;
 }
+
+html {
+  &[lang="en"] {
+    .language { display: none; }
+    .language.en { display: block; }
+  }
+  &[lang="pt-BR"] {
+    .language { display: none; }
+    .language.pt-br { display: block; }
+  }
+}
+
+h1.page-header {
+  color: @main-color;
+  border-bottom: 2px solid;
+  border-color: @main-color;
+}
+
+#block-managedad {
+  background-image: url('../images/ad-background.jpg');
+  padding: 20px 0;
+}
+
+.main-container {
+  min-height: 300px;
+}
+
+.view-filters {
+  padding: 10px;
+  border: 1px solid @main-gray-lighter;
+  background-color: @main-gray-soft;
+  
+  * {
+    color: @main-gray-darker;
+    border-color: @main-gray;
+    font-weight: normal;
+  }
+  .form-submit {
+    color: @main-gray;
+    border-color: @main-gray;
+  }
+  .form-item {
+    
+    
+    @media screen and (min-width: @screen-sm) {
+      margin-right: 20px;
+    }
+  }
+}
+
+.pager-nav {
+  .pagination > li > a {
+    color: @main-color;
+  }
+  .pagination > li.active > a {
+    background-color: @main-color;
+    border-color: @main-color;
+    color: @white;
+  }
+}

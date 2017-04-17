@@ -1,17 +1,20 @@
 // main: style.less
 
-header.navbar {
-  border: none;
-}
-
 #navigation {
-  border-top: 2px solid @main-gray;
-  border-bottom: 2px solid @main-gray;
-  transition: all ease-in 10s;
+  border-top: 2px solid;
+  border-bottom: 2px solid;
+  border-color: @main-color;
+  transition: all .3s ease-in-out;
 
   .js-banner-mask-loaded & {
-    border-color: @main-color;
+    background-color: @main-gray-soft;
+    //border-color: @main-color; // colors.less
   }
+}
+
+header.navbar {
+  border: none;
+  margin-bottom: 40px;
 }
 
 #navbar-collapse {
@@ -30,19 +33,26 @@ header.navbar {
     li {
       display: inline-block;
       float: none;
+      
+      &.active a {
+        background-color: transparent;
+      }
     }
     a {
       padding-bottom: 10px;
       color: @main-gray-darker;
+      text-decoration: underline;
+      text-decoration-color: transparent;
       transition: all ease-in 0.3s;
-
+      
       &:hover {
         color: @main-color;
+        text-decoration-color: @main-color;
       }
     }
     .is-active {
-      color: @main-color-darker;
       pointer-events: none;
+      color: @main-gray-darker;
 
       &:before,
       &:after {
@@ -52,8 +62,11 @@ header.navbar {
         margin-top: -6px;
         margin-right: 2px;
         font-size: 30px;
-        color: @black;
       }
     }
   }
+}
+
+.region-header {
+  margin-bottom: 20px;
 }

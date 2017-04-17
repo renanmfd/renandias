@@ -1,0 +1,83 @@
+// main: style.less
+
+.footer {
+  background-image: url('../images/footer-grass.png');
+  background-repeat: repeat-x;
+  background-position: bottom left;
+  background-size: auto 70px;
+  background-color: @main-gray-soft;
+
+  padding-bottom: 90px;
+  margin-bottom: -1px;
+  text-align: center;
+  border: none;
+  border-top: 1px solid @main-gray;
+  
+  @media screen and (min-width: @screen-sm) {
+    text-align: left;
+  }
+  
+  &:after,
+  &:before {
+    content: '';
+    display: block;
+    position: absolute;
+    bottom: 5px;
+    width: 90px;
+    height: 120px;
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+  &:after {
+    background-image: url('../images/footer-kenshin.png');
+    left: 20px;
+  }
+  &:before {
+    background-image: url('../images/footer-shishio.png');
+    right: 20px;
+  }
+  
+  .container {
+    position: relative;
+  }
+  
+  .menu {
+    li {
+      a {
+        padding: 5px 15px;
+        padding-left: 0;
+        color: @main-gray-darker;
+        text-decoration: underline;
+        text-decoration-color: transparent;
+        transition: all .3s ease-in-out;
+        
+        &:hover {
+          text-decoration-color: @black;
+        }
+        &:before {
+          content: '\002a';
+          display: inline-block;
+          margin-right: 10px;
+
+          font-family: 'Glyphicons Halflings';
+          font-size: 12px;
+          font-style: normal;
+          font-weight: 400;
+          line-height: 1;
+          -webkit-font-smoothing: antialiased;
+        }
+      }
+    }
+  }
+  
+  #block-portifolio-powered {
+    position: absolute;
+    bottom: -85px;
+    right: 0;
+    width: auto;
+    
+    span, a {
+      color: @white;
+    }
+  }
+}

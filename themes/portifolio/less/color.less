@@ -1,0 +1,54 @@
+// main: style.less
+
+@transition-time: 8s;
+
+.path-frontpage #banner,
+.path-frontpage #navigation,
+.path-frontpage .article.display-card,
+.path-frontpage .book.display-teaser {
+  border-color: @main-gray;
+  transition: all @transition-time ease-in;
+
+  .js-banner-mask-loaded& {
+    border-color: @main-color;
+  }
+}
+
+.path-frontpage .article.display-card h3 span,
+.path-frontpage .book.display-teaser h3 span,
+.path-frontpage .view-header a {
+  color: @main-gray;
+  transition: all @transition-time ease-in;
+
+  .js-banner-mask-loaded& {
+    color: @main-color;
+  }
+}
+
+.path-frontpage .view-header h3:after {
+  background-color: @main-gray;
+  transition: all @transition-time ease-in;
+
+  .js-banner-mask-loaded& {
+    background-color: @main-color;
+  }
+}
+
+.path-frontpage .view-header a:hover {
+  text-decoration-color: @main-gray;
+  transition: all @transition-time ease-in;
+
+  .js-banner-mask-loaded& {
+    text-decoration-color: @main-color;
+  }
+}
+
+.path-frontpage #logo-gradient {
+  opacity: 0.0;
+  display: inline-block;
+  transition: opacity @transition-time ease 2s;
+
+  .js-banner-mask-loaded& {
+    opacity: 1.0;
+  }
+}

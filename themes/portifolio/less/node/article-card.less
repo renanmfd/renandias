@@ -10,17 +10,23 @@
   margin-bottom: 30px;
   overflow: hidden;
   
+  border-left: @theme-line-width solid;
+  border-color: @main-color;
+  
   > a {
     display: block;
     position: relative;
-    padding-left: 20px;
-    padding-bottom: 15px;
+    padding-left: 15px;
+    padding-bottom: 0;
+    padding-top: 5px;
+    padding-bottom: 5px;
     
-    border: 3px solid @main-color;
-    border-top: 0;
-    border-right: 0;
-    border-bottom-left-radius: 60px;
+    background-color: transparent;
     transition: all .3s ease-in-out;
+    
+    @media screen and (min-width: @screen-sm) {
+      padding-left: 20px;
+    }
 
     &:hover,
     &:focus {
@@ -28,9 +34,9 @@
     }
     
     &:hover {
-      border-color: @main-color-lighter;
+      background-color: @main-gray-soft;
 
-      h3 span {
+      h3 {
         text-decoration-color: @main-color;
       }
       img {
@@ -45,6 +51,10 @@
     line-height: 26px;
     margin-top: 0;
     margin-bottom: 5px;
+    
+    text-decoration: underline;
+    text-decoration-color: transparent;
+    transition: all .3s ease-in-out;
     overflow: hidden;
     
     @media screen and (min-width: 500px) {
@@ -67,11 +77,8 @@
     span {
       display: table-cell; 
       vertical-align: middle; 
-      text-align: left; 
+      text-align: left;
       color: @main-color;
-      text-decoration: underline;
-      text-decoration-color: transparent;
-      transition: all .3s ease-in-out;
     }
   }
   
@@ -88,26 +95,30 @@
     height: 20px * @lines-body;
     line-height: 20px;
     margin-top: 10px;
-    color: @coal;
+    color: @main-gray-darker;
     overflow: hidden;
     
     @media screen and (min-width: @screen-sm) {
       display: block;
     }
-
     * {
-      color: @black;
       text-align: left;
     }
   }
-  
-  .author {
-    color: @main-gray;
-  }
-  
+
   footer {
     margin-top: 10px;
-    padding-left: 20px;
-    text-align: right;
+    
+    .author {
+      text-align: left;
+      font-size: 14px;
+      color: @main-gray;
+      
+      .glyphicon {
+        vertical-align: text-top;
+        margin-right: 5px;
+        color: @main-gray;
+      }
+    }
   }
 }
