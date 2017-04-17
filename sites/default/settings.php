@@ -87,9 +87,9 @@
  * @endcode
  */
 $databases['default']['default'] = array (
-  'database' => '',
-  'username' => '',
-  'password' => '',
+  'database' => 'menin562_renandias',
+  'username' => 'menin562_renan',
+  'password' => 'res2res2',
   'prefix' => '',
   'host' => 'localhost',
   'port' => '3306',
