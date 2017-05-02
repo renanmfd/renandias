@@ -2,7 +2,9 @@
 
 namespace Drupal\advagg\State;
 
+use Drupal\Core\Cache\CacheBackendInterface;
 use Drupal\Core\KeyValueStore\KeyValueFactoryInterface;
+use Drupal\Core\Lock\LockBackendInterface;
 use Drupal\Core\State\StateInterface;
 
 /**
@@ -16,7 +18,8 @@ class Aggregates extends State implements StateInterface {
    * @param \Drupal\Core\KeyValueStore\KeyValueFactoryInterface $key_value_factory
    *   The key value store to use.
    */
-  public function __construct(KeyValueFactoryInterface $key_value_factory) {
+  public function __construct(KeyValueFactoryInterface $key_value_factory, CacheBackendInterface $cache, LockBackendInterface $lock) {
+    parent::__construct($key_value_factory, $cache, $lock);
     $this->keyValueStore = $key_value_factory->get('advagg_aggregates');
     $this->pathColumn = 'uri';
   }

@@ -3,16 +3,17 @@
 namespace Drupal\advagg\State;
 
 use Drupal\Core\Asset\AssetDumperInterface;
+use Drupal\Core\Cache\CacheBackendInterface;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\KeyValueStore\KeyValueFactoryInterface;
-use Drupal\Core\State\StateInterface;
+use Drupal\Core\Lock\LockBackendInterface;
 use Drupal\Component\Utility\Crypt;
 
 /**
  * Provides AdvAgg with a file status state system using a key value store.
  */
-class Files extends State implements StateInterface {
+class Files extends State {
 
   /**
    * A config object for the advagg configuration.
@@ -53,8 +54,13 @@ class Files extends State implements StateInterface {
    *   The module handler.
    * @param \Drupal\Core\Asset\AssetDumperInterface $asset_dumper
    *   The dumper for optimized CSS assets.
+   * @param \Drupal\Core\Cache\CacheBackendInterface $cache
+   *   The cache backend.
+   * @param \Drupal\Core\Lock\LockBackendInterface $lock
+   *   The lock backend.
    */
-  public function __construct(KeyValueFactoryInterface $key_value_factory, ConfigFactoryInterface $config_factory, ModuleHandlerInterface $module_handler, AssetDumperInterface $asset_dumper) {
+  public function __construct(KeyValueFactoryInterface $key_value_factory, ConfigFactoryInterface $config_factory, ModuleHandlerInterface $module_handler, AssetDumperInterface $asset_dumper, CacheBackendInterface $cache, LockBackendInterface $lock) {
+    parent::__construct($key_value_factory, $cache, $lock);
     $this->keyValueStore = $key_value_factory->get('advagg_files');
     $this->config = $config_factory->get('advagg.settings');
     $this->moduleHandler = $module_handler;
@@ -137,7 +143,6 @@ class Files extends State implements StateInterface {
     $this->moduleHandler->alter('advagg_scan_file', $file, $data, $cached);
     unset($data['contents']);
     $this->set($file, $data);
-    $this->cache[$file] = $data;
     return $data;
   }
 
@@ -152,11 +157,11 @@ class Files extends State implements StateInterface {
 
     foreach ($keys as $key) {
       // Check if we have a value in the cache.
-      if (isset($this->cache[$key])) {
-        $values[$key] = $this->cache[$key];
+      $value = $this->get($key);
+      if ($value) {
+        $values[$key] = $value;
       }
-      // Load the value if we don't have an explicit NULL value.
-      elseif (!array_key_exists($key, $this->cache)) {
+      else {
         $load[] = $key;
       }
     }
@@ -168,7 +173,7 @@ class Files extends State implements StateInterface {
         if (isset($loaded_values[$key])) {
           if ($refresh_data === FALSE) {
             $values[$key] = $loaded_values[$key];
-            $this->cache[$key] = $loaded_values[$key];
+            $this->set($key, $loaded_values[$key]);
             continue;
           }
           $file_contents = (string) @file_get_contents($key);
@@ -178,7 +183,6 @@ class Files extends State implements StateInterface {
             if (!file_exists($key)) {
               $this->delete($key);
               $values[$key] = NULL;
-              $this->cache[$key] = NULL;
               continue;
             }
             // If cache is Normal, check file for changes.
@@ -186,7 +190,7 @@ class Files extends State implements StateInterface {
               $content_hash = Crypt::hashBase64($file_contents);
               if ($content_hash == $loaded_values[$key]['content_hash']) {
                 $values[$key] = $loaded_values[$key];
-                $this->cache[$key] = $loaded_values[$key];
+                $this->set($key, $loaded_values[$key]);
                 continue;
               }
             }
@@ -205,6 +209,17 @@ class Files extends State implements StateInterface {
     }
 
     return $values;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function get($key, $default = NULL) {
+    if (version_compare(\Drupal::VERSION, '8.3.0') >= 0) {
+      return parent::get($key, $default);
+    }
+    $values = parent::getMultiple(array($key));
+    return isset($values[$key]) ? $values[$key] : $default;
   }
 
   /**
