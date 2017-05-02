@@ -4,4 +4,27 @@ global-styling:
       css/style.css: {}
   js:
     js/general.js: {}
-    js/home.js: {}
+
+page-home:
+  js:
+    js/page-home.js: {}
+
+page-portifolio:
+  js:
+    js/page-portifolio.js: {}
+
+colorbox:
+  js:
+    vendor/colorbox/jquery.colorbox.js: {}
+    js/colorbox.js: {}
+  css:
+    component:
+      vendor/colorbox/exemple1/colorbox.css: {}
+
+lightbox:
+  js:
+    vendor/lightbox/js/lightbox.js: {}
+    js/lightbox.js: {}
+  css:
+    component:
+      vendor/lightbox/css/lightbox.css: {}

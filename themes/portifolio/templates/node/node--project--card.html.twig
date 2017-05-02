@@ -85,8 +85,8 @@
   {% endif %}
   {{ title_suffix }}
 
-  <a{{ content_attributes.addClass('content') }} href="#node-{{ node.id() }}">
-    {{ content.field_image[0] }}
+  <a{{ content_attributes.addClass('content').addClass('smooth-anchor') }} href="#node-{{ node.id() }}">
+    {{ content }}
   </a>
 
 </article>

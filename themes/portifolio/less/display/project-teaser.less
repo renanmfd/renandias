@@ -1,0 +1,215 @@
+// main: ../style.less
+
+.project.display-teaser {
+  margin-bottom: 30px;
+  padding-bottom: 30px;
+  border-bottom: 1px solid @main-color;
+
+  .image.carousel {
+    margin-bottom: 20px;
+    margin-top: 40px;
+
+    .carousel-indicators {
+      display: inline-flex;
+      bottom: -20px;
+      left: 0;
+      width: 100%;
+      height: 20px;
+      margin-bottom: 0;
+      margin-left: 0;
+
+      li {
+        flex-grow: 1;
+        height: 100% !important;
+        border-radius: 0 !important;
+        margin: 0;
+        background-color: @main-gray-lighter;
+        transition: all 0.3s ease-in-out;
+
+        &:hover {
+          background-color: @main-gray;
+        }
+        &.active {
+          background-color: @main-color-lighter;
+        }
+      }
+    }
+  }
+  .header {
+    font-size: 0;
+  }
+  h2 {
+    margin-top: 0;
+    margin-bottom: 10px;
+
+    a {
+      color: @main-color;
+      transition: all .3s ease-in-out;
+      
+      &:hover {
+        color: @main-color-darker;
+      }
+    }
+  }
+  .field {
+    margin-top: 10px;
+    margin-bottom: 0;
+  }
+  .field--name-field-company,
+  .field--name-field-website {
+    border: 1px solid @main-color;
+    
+    @media screen and (min-width: @screen-sm) and (max-width: @screen-sm-max) {
+      display: inline-block;
+      vertical-align: top;
+      width: 49%;
+      margin-left: 1%;
+    }
+
+    .field--label {
+      min-width: 120px;
+      padding: 5px 20px;
+      text-align: center;
+      color: @coal;
+    }
+    .field--item {
+      padding-right: 0;
+
+      a {
+        display: block;
+        margin-left: 120px;
+        padding: 5px 20px;
+
+        text-align: center;
+        background-color: @main-color-lighter;
+        color: @white;
+        text-decoration: none;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        transition: all .3s ease-in-out;
+        
+        &:hover {
+          background-color: @main-color;
+        }
+      }
+    }
+  }
+  .field--name-field-company {
+    @media screen and (min-width: @screen-sm) and (max-width: @screen-sm-max) {
+      margin-right: 1%;
+      margin-left: 0;
+    }
+    @media screen and (min-width: @screen-md) {
+      margin-top: 0;
+    }
+  }
+  .field--name-field-image-hex {
+    margin-top: 0;
+  }
+  .field--name-field-technologies {
+    padding: 10px 0;
+    background-color: @main-gray-soft;
+  }
+  .field--name-field-tasks {
+    li {
+      color: @main-gray-darker;
+    }
+  }
+  .links {
+    margin-top: 10px;
+    margin-bottom: 0;
+
+    .node-readmore {
+      a {
+        display: block;
+        padding: 5px 20px;
+        color: @white;
+        border: 1px solid @main-color;
+        background-color: @main-color-lighter;
+        text-decoration: none;
+        transition: all .3s ease-in-out;
+        
+        &:hover {
+          background-color: @main-color;
+        }
+      }
+    }
+  }
+  ul.field-items {
+    max-width: 400px;
+    margin: 0 auto;
+    padding-left: 0;
+    list-style: none;
+    list-style-type: none;
+
+    @media screen and (min-width: @screen-md) and (max-width: @screen-md-max) {
+      max-width: 300px;
+    }
+
+    .clearfix();
+  }
+  li.field-item {
+    float: left;
+
+    @media screen and (max-width: @screen-sm-max) {
+      &:nth-child(5),
+      &:nth-child(12),
+      &:nth-child(19),
+      &:nth-child(26) {
+        clear: left;
+        margin-left: 51px;
+      }
+      &:nth-child(n+5) {
+        margin-top: -20px;
+      }
+      &:nth-child(8),
+      &:nth-child(15),
+      &:nth-child(22),
+      &:nth-child(29) {
+        clear: left;
+      }
+    }
+
+    @media screen and (min-width: @screen-md) and (max-width: @screen-md-max) {
+      &:nth-child(4),
+      &:nth-child(9),
+      &:nth-child(14),
+      &:nth-child(19),
+      &:nth-child(24),
+      &:nth-child(29) {
+        clear: left;
+        margin-left: 50px;
+      }
+      &:nth-child(n+4) {
+        margin-top: -20px;
+      }
+      &:nth-child(6),
+      &:nth-child(11),
+      &:nth-child(16),
+      &:nth-child(21),
+      &:nth-child(26) {
+        clear: left;
+      }
+    }
+
+    @media screen and (min-width: @screen-lg) {
+      &:nth-child(5),
+      &:nth-child(12),
+      &:nth-child(19),
+      &:nth-child(26) {
+        clear: left;
+        margin-left: 50px;
+      }
+      &:nth-child(n+5) {
+        margin-top: -20px;
+      }
+      &:nth-child(8),
+      &:nth-child(15),
+      &:nth-child(22),
+      &:nth-child(29) {
+        clear: left;
+      }
+    }
+  }
+}

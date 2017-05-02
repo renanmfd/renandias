@@ -1,6 +1,6 @@
 // main: style.less
 
-@main-color: #904b4b;
+@main-color: #913434;
 @main-color-darker: darken(@main-color, 20%);
 @main-color-lighter: lighten(@main-color, 20%);
 
@@ -22,3 +22,18 @@
 @screen-sm: 768px;
 @screen-md: 992px;
 @screen-lg: 1200px;
+
+@screen-xs-max: ((@screen-sm - 1px));
+@screen-sm-max: ((@screen-md - 1px));
+@screen-md-max: ((@screen-lg - 1px));
+
+.clearfix() {
+  &:before,
+  &:after {
+    content: " "; // 1
+    display: table; // 2
+  }
+  &:after {
+    clear: both;
+  }
+}

@@ -7,9 +7,9 @@
  */
 
 /**
- * Implements hook_theme_suggestions_HOOK_alter() for node.html.twig.
- */                                                                               
-function portifolio_theme_suggestions_node_alter(array &$suggestions, array $variables) {
+ * Implements hook_theme_suggestions_node_alter().
+ */                                                                          
+function portifolio_theme_suggestions_node_alter(&$suggestions, $variables) {
   // Add template suggestions based on the current view mode.
   $node = $variables['elements']['#node'];
   $suggestions[] = 'node__' . $variables['elements']['#view_mode'];
@@ -17,12 +17,49 @@ function portifolio_theme_suggestions_node_alter(array &$suggestions, array $var
 }
 
 /**
+ * Implements hook_theme_suggestions_taxonomy_term_alter().
+ */
+function portifolio_theme_suggestions_taxonomy_term_alter(&$suggestions, $variables, $hook) {
+  $term = $variables['elements']['#taxonomy_term'];
+  $suggestions[] = 'taxonomy_term__' . $variables['elements']['#view_mode'];
+  $suggestions[] = 'taxonomy_term__' . $term->bundle() . '__' . $variables['elements']['#view_mode'];
+}
+
+/**
+ * Implements template_preprocess_page().
+ */
+function portifolio_preprocess_page(&$vars) {
+  if ($vars['is_front']) {
+    $vars['#attached']['library'][] = 'portifolio/page-home';
+  }
+  $pageTitle = $vars['page']['#title'];
+  if ($pageTitle == 'Portifolio') {
+    $vars['#attached']['library'][] = 'portifolio/page-portifolio';
+  }
+}
+
+/**
  * Implements hook_preprocess_node().
  */
 function portifolio_preprocess_node(&$vars) {
   $node = $vars['elements']['#node'];
-  if ($node->bundle() == 'technology') {
-    // Load vocabulary experience level and save all terms.
+  switch ($node->bundle()) {
+    case 'technology':
+      portifolio_preprocess_technology_node($vars);
+      break;
+    case 'project':
+      portifolio_preprocess_project_node($vars);
+      break;
+  }
+}
+
+/**
+ * Preprocess Technology content type nodes.
+ */
+function portifolio_preprocess_technology_node(&$vars) {
+  $node = $vars['elements']['#node'];
+  // Load vocabulary experience level and save all terms.
+  if ($vars['elements']['#view_mode'] == 'full')  {
     $terms = \Drupal::service('entity_type.manager')
       ->getStorage("taxonomy_term")
       ->loadTree('experience_level');
@@ -41,4 +78,20 @@ function portifolio_preprocess_node(&$vars) {
     }
     ksm($vars['exp_levels']);
   }
+}
+
+/**
+ * Preprocess Project content type nodes.
+ */
+function portifolio_preprocess_project_node(&$vars) {
+  //ksm($vars['content']['field_image']);                                                                                                                                                                                                                                                
+  //$vars['content']['field_image']['#attached'] = ['library' => ['portifolio/lightbox']];
+}
+
+/**
+ * Implements template_preprocess_responsive_image().
+ */
+function portifolio_preprocess_responsive_image(&$vars) {
+  $galleryName = 'gallery-' . str_replace('_', '-', $vars['responsive_image_style_id']);
+  $vars['img_element']['#attributes']['rel'] = $galleryName;
 }

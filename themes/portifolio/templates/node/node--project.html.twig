@@ -75,67 +75,60 @@
     'clearfix',
   ]
 %}
-
-<article{{ attributes.addClass(classes)|without('id') }} id="node-{{ node.id() }}">
+<article{{ attributes.addClass(classes) }}>
 
   {{ attach_library('portifolio/lightbox') }}
+
   {{ title_prefix }}
+  {% if not page %}
+    <h2{{ title_attributes }}>
+      <a href="{{ url }}" rel="bookmark">{{ label }}</a>
+      {% if display_submitted %}
+        <div{{ author_attributes.addClass('author') }}>
+          {% trans %}Submitted by {{ author_name }} on {{ date }}{% endtrans %}
+          {{ metadata }}
+        </div>
+      {% endif %}
+    </h2>
+  {% endif %}
   {{ title_suffix }}
 
-  <div class="row">
-
-    <div class="header-wrapper col-xs-12 col-md-5 col-lg-6">
-      {% if not page %}
-        <h2{{ title_attributes }}>
-            <a href="{{ url }}" rel="bookmark">{{ label }}</a>
-        </h2>
-      {% endif %}
-
-      <div{{ content_attributes.addClass('header') }}>
-        {{ content|without('field_image')|without('field_tasks')|without('links') }}
+  {% set carrousel = 'carrousel-' ~ node.id() %}
+  <div class="image-wrapper">
+    <div{{ content_attributes.addClass('image carousel slide') }} 
+         data-ride="carousel" id="{{ carrousel }}">
+      {# Indicators #}
+      <ol class="carousel-indicators">
+        {% for key, image in content.field_image if key|first != '#' %}
+          <li data-target="#{{ carrousel }}" data-slide-to="{{ key }}"
+          {% if loop.first %}{{ ' class="active"' }}{% endif %}></li>
+        {% endfor %}
+      </ol>
+      {# Slides #}
+      <div class="carousel-inner" role="listbox">
+        {% for key, image in content.field_image if key|first != '#' %}
+          <div id="#carousel-{{ key }}" class="item{% if loop.first %}{{ ' active' }}{% endif %}">
+            <a href="{{ file_url(node.field_image[loop.index - 1].entity.fileuri) }}" 
+               data-lightbox="{% trans %}Project{% endtrans %} {{ node.getTitle() }}">
+              {{ image }}
+            </a>
+          </div>
+        {% endfor %}
       </div>
+      {# Controls #}
+      <a class="left carousel-control" href="#{{ carrousel }}" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="right carousel-control" href="#{{ carrousel }}" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
     </div>
+  </div>
 
-    <div class="image-wrapper hidden-xs hidden-sm col-md-7 col-lg-6">
-      {% set carrousel = 'carrousel-' ~ node.id() %}
-      <div class="image carousel slide" id="{{ carrousel }}"> 
-        {# Indicators #}
-        <ol class="carousel-indicators">
-          {% for key, image in content.field_image if key|first != '#' %}
-            <li data-target="#{{ carrousel }}" data-slide-to="{{ key }}"
-            {% if loop.first %}{{ ' class="active"' }}{% endif %}></li>
-          {% endfor %}
-        </ol>
-        {# Slides #}
-        <div class="carousel-inner" role="listbox">
-          {% for key, image in content.field_image if key|first != '#' %}
-            <div id="#carousel-{{ key }}" class="item{% if loop.first %}{{ ' active' }}{% endif %}">
-              <a href="{{ file_url(node.field_image[loop.index - 1].entity.fileuri) }}" 
-                 data-lightbox="{% trans %}Project{% endtrans %} {{ node.getTitle() }}">
-                {{ image }}
-              </a>
-            </div>
-          {% endfor %}
-        </div>
-        {# Controls #}
-        <a class="left carousel-control" href="#{{ carrousel }}" role="button" data-slide="prev">
-          <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-          <span class="sr-only">Previous</span>
-        </a>
-        <a class="right carousel-control" href="#{{ carrousel }}" role="button" data-slide="next">
-          <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-          <span class="sr-only">Next</span>
-        </a>
-      </div>
-    </div>
-    
-    <div class="content-wrapper col-xs-12">
-      <div{{ content_attributes.addClass('content').removeClass('header') }}>
-        {{ content.field_tasks }}
-        {{ content.links }}
-      </div>
-    </div>
-
+  <div{{ content_attributes.addClass('content') }}>
+    {{ content|without('field_image') }}
   </div>
 
 </article>
